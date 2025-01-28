@@ -29,7 +29,7 @@ const Physician = () => {
   useEffect(() => {
     const npiValue = searchParams.get('npi');
     if (npiValue) {
-      setValue('physiciansNPI', npiValue); // Set the physiciansNPI input value
+      setValue('Pharmacy_NPI', npiValue); // Set the physiciansNPI input value
     }
   }, [searchParams, setValue]);
   const [loading, setLoading] = useState(false);
@@ -43,7 +43,7 @@ const Physician = () => {
   const fetchPhysicians = async () => {
     setFetchingPhysicians(true);
     try {
-      const response = await axios.get('https://edi-api-demo.edix12pro.com/api/listPhysicians');
+      const response = await axios.get('https://edi-api-demo.edix12pro.com/api/listPharmacy');
       const physiciansData = response.data.data;
       console.log(physiciansData);
 
@@ -62,12 +62,12 @@ const Physician = () => {
   const handleSelectChange = (selectedOption) => {
     console.log(selectedOption);
     setSelectedPhysician(selectedOption);
-    setValue('physiciansNPI', selectedOption?.value || '');
+    setValue('Pharmacy_NPI', selectedOption?.value || '');
   };
 
   const handleInputChange = (e) => {
     const npi = e.target.value;
-    setValue('physiciansNPI', npi);
+    setValue('Pharmacy_NPI', npi);
 
     const matchingOption = physicians.find((option) => option.value === npi);
     if (matchingOption) {
@@ -83,20 +83,17 @@ const Physician = () => {
     setLoading(true);
     try {
       const response = await axios.request({
-        url: 'https://edi-api-demo.edix12pro.com/api/listClaims',
+        url: 'https://edi-api-demo.edix12pro.com/api/listClaimsA',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         params: {
-          pat_lname: data.pat_lname,
-          physicians_npi: data.physiciansNPI,
-          pat_member_id: data.memberId,
-          pat_dob: data.dateOfBirth,
-          dos: data.dateOfService,
-          pat_fname: data.pat_fname,
-          physicians_state: data.state,
-          physicians_zip: data.zipcode,
+          Cardholder_ID: data.Cardholder_ID,
+          Pharmacy_NPI: data.Pharmacy_NPI,
+          Date_Processed: data.Date_Processed,
+          Pharmacy_State:data.Pharmacy_State,
+          Pharmacy_Zip_Code:data.Pharmacy_Zip_Code,
         },
       });
 
@@ -140,8 +137,8 @@ const Physician = () => {
               <Select
                 options={physicians}
                 isLoading={fetchingPhysicians}
-                loadingMessage={() => 'Loading physicians...'}
-                noOptionsMessage={() => 'No physicians found'}
+                loadingMessage={() => 'Loading pharmacy...'}
+                noOptionsMessage={() => 'No pharmacy found'}
                 isSearchable
                 value={selectedPhysician}
                 onChange={handleSelectChange}
@@ -163,9 +160,9 @@ const Physician = () => {
               <label className="block text-[#3A3541] text-[14px]">Pharmacy NPI</label>
               <Input
                 placeholder="1760472146"
-                value={watch('physiciansNPI')}
+                value={watch('Pharmacy_NPI')}
                 onChange={handleInputChange}
-                onClear={() => setValue('physiciansNPI', '')}
+                onClear={() => setValue('Pharmacy_NPI', '')}
               />
             </div>
 
@@ -174,21 +171,21 @@ const Physician = () => {
               {/*<Input placeholder="8467382964" {...register('memberId')} />*/}
               <Input
                 placeholder="XR6144696"
-                value={watch('memberId')}
-                onChange={(e) => setValue('memberId', e.target.value)}
-                onClear={() => setValue('memberId', '')}
+                value={watch('Cardholder_ID')}
+                onChange={(e) => setValue('Cardholder_ID', e.target.value)}
+                onClear={() => setValue('Cardholder_ID', '')}
               />
             </div>
 
             <div className="flex flex-col gap-2 col-span-1 w-full">
-              <label className="block text-[#3A3541] text-[14px]">Date Received</label>
+              <label className="block text-[#3A3541] text-[14px]">Date Processed</label>
               <DatePickerInput
-                value={watch('dateOfService')}
+                value={watch('Date_Processed')}
                 onChange={(date) => {
                   const formattedDate = date ? format(new Date(date), 'yyyy-MM-dd') : null;
-                  setValue('dateOfService', formattedDate);
+                  setValue('Date_Processed', formattedDate);
                 }}
-                name="dateOfService"
+                name="Date_Processed"
               />
 
               {/*<DatePickerInput*/}
@@ -207,9 +204,9 @@ const Physician = () => {
               {/*<Input placeholder="" {...register('state')} />*/}
               <Input
                 placeholder="TX"
-                value={watch('state')}
-                onChange={(e) => setValue('state', e.target.value)}
-                onClear={() => setValue('state', '')}
+                value={watch('Pharmacy_State')}
+                onChange={(e) => setValue('Pharmacy_State', e.target.value)}
+                onClear={() => setValue('Pharmacy_State', '')}
               />
             </div>
 
@@ -218,9 +215,9 @@ const Physician = () => {
               {/*<Input placeholder="" {...register('zipcode')} />*/}
               <Input
                 placeholder="379092707"
-                value={watch('zipcode')}
-                onChange={(e) => setValue('zipcode', e.target.value)}
-                onClear={() => setValue('zipcode', '')}
+                value={watch('Pharmacy_Zip_Code')}
+                onChange={(e) => setValue('Pharmacy_Zip_Code', e.target.value)}
+                onClear={() => setValue('Pharmacy_Zip_Code', '')}
               />
             </div>
           </div>

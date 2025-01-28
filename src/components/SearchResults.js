@@ -237,10 +237,9 @@ const SearchResults = ({ data, onViewItem }) => {
             <tr className="bg-gray-100">
               {[
                 { label: 'Member ID', key: 'pat_member_id' },
-                { label: 'Date Received', key: 'pat_dob' },
-                { label: 'Date of Service', key: 'dos' },
+                { label: 'Date Received', key: 'claim_date_recieved' },
                 { label: 'Physician NPI', key: 'physicians_npi' },
-                { label: 'Patient Last Name', key: 'pat_lname' },
+                { label: 'Group Number', key: 'group_number' },
                 { label: 'Status', key: 'status' },
                 { label: 'Actions', key: '' },
               ].map(({ label, key }) => (
@@ -264,12 +263,11 @@ const SearchResults = ({ data, onViewItem }) => {
               return (
                 <tr key={index} className="border-t">
                   <td className="px-4 py-2 text-gray-700">{item.pat_member_id}</td>
-                  <td className="px-4 py-2 text-gray-700">{item.pat_dob}</td>
-                  <td className="px-4 py-2 text-gray-700">{item.dos}</td>
+                  <td className="px-4 py-2 text-gray-700">{item.claim_date_recieved}</td>
                   <td className="px-4 py-2 text-gray-700">{item.physicians_npi}</td>
-                  <td className="px-4 py-2 text-gray-700">{item.pat_lname}</td>
+                  <td className="px-4 py-2 text-gray-700">{item.group_number}</td>
                   <td className="px-4 py-2 text-gray-700">
-                    <span className={`font-semibold ${item.status === 'Approved' ? 'text-green-600' : 'text-red-600'}`}>
+                    <span className={`font-semibold ${item.status === 'Paid' ? 'text-green-600' : 'text-red-600'}`}>
                       {item.status}
                     </span>
                   </td>

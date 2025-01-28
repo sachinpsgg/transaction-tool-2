@@ -41,18 +41,19 @@ const Claims = () => {
     setLoading(true);
     try {
       const response = await axios.request({
-        url: 'https://edi-api-demo.edix12pro.com/api/listClaims',
+        url: 'https://edi-api-demo.edix12pro.com/api/listClaimsA',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         params: {
-          pat_lname: data.pat_lname,
-          physicians_npi: data.physicians_npi,
-          pat_member_id: data.pat_member_id,
-          pat_dob: data.pat_dob,
-          dos: data.dos,
-          pat_fname: data.pat_fname,
+          Cardholder_ID: data.Cardholder_ID,
+          Pharmacy_NPI: data.Pharmacy_NPI,
+          Date_Processed: data.Date_Processed,
+          claim_status:data.status,
+          Other_Coverage_Code:data.Other_Coverage_Code,
+          Group_Number:data.Group_Number,
+
         },
       });
 
@@ -89,9 +90,9 @@ const Claims = () => {
               {/*<Input placeholder="MEYERS" {...register('pat_lname')} />*/}
               <Input
                 placeholder="MEYERS"
-                value={watch('pat_lname')}
-                onChange={(e) => setValue('pat_lname', e.target.value)}
-                onClear={() => setValue('pat_lname', '')}
+                value={watch('Cardholder_ID')}
+                onChange={(e) => setValue('Cardholder_ID', e.target.value)}
+                onClear={() => setValue('Cardholder_ID', '')}
               />
             </div>
             <div className="flex flex-col gap-2 col-span-1">
@@ -99,9 +100,9 @@ const Claims = () => {
               {/*<Input placeholder="James" {...register('pat_fname')} />*/}
               <Input
                 placeholder="JAMES"
-                value={watch('pat_fname')}
-                onChange={(e) => setValue('pat_fname', e.target.value)}
-                onClear={() => setValue('pat_fname', '')}
+                value={watch('Pharmacy_NPI')}
+                onChange={(e) => setValue('Pharmacy_NPI', e.target.value)}
+                onClear={() => setValue('Pharmacy_NPI', '')}
               />
             </div>
             <div className="flex flex-col gap-2 col-span-1">
@@ -111,15 +112,41 @@ const Claims = () => {
                 id="demo-simple-select-autowidth"
                 autoWidth
                 label="Age"
+                {...register('claim_status')} // Register the field in react-hook-form
+                value={watch('claim_status') || ''} // Watch the current value
+                onChange={(e) => setValue('claim_status', e.target.value)} // Update the value in react-hook-form
+
                 sx={{
-                  height:'45px',
-                  background:'#F4F5F9',
-                  borderRadius:'10px'
-                }}
-              >
-                <MenuItem value='Approved'>Approved</MenuItem>
-                <MenuItem value='Reversed'>Reversed</MenuItem>
-                <MenuItem value='Rejected'>Rejected</MenuItem>
+                  height: '45px',
+                  background: '#F4F5F9',
+                  borderRadius: '10px',
+                }}>
+                <MenuItem value="paid">Approved</MenuItem>
+                <MenuItem value="reversed">Reversed</MenuItem>
+                <MenuItem value="rejected">Rejected</MenuItem>
+              </Select>
+            </div>
+            <div className="flex flex-col gap-2 col-span-1">
+              <label className="block text-[#3A3541] text-[14px]">Group Number</label>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
+                {...register('Group_Number')} // Register the field in react-hook-form
+                value={watch('Group_Number') || ''} // Watch the current value
+                onChange={(e) => setValue('Group_Number', e.target.value)} // Update the value in react-hook-form
+                sx={{
+                  height: '45px',
+                  background: '#F4F5F9',
+                  borderRadius: '10px',
+                }}>
+                <MenuItem value="100034">100034</MenuItem>
+                <MenuItem value="100035">100035</MenuItem>
+                <MenuItem value="100034C">100034C</MenuItem>
+                <MenuItem value="100035C">100035C</MenuItem>
+                <MenuItem value="100036">100036</MenuItem>
+                <MenuItem value="100047">100047</MenuItem>
+                <MenuItem value="100034B">100034B</MenuItem>
               </Select>
 
             </div>
@@ -128,21 +155,21 @@ const Claims = () => {
               {/*<Input placeholder="8934673327" {...register('pat_member_id')} />*/}
               <Input
                 placeholder="XR6144696"
-                value={watch('pat_member_id')}
-                onChange={(e) => setValue('pat_member_id', e.target.value)}
-                onClear={() => setValue('pat_member_id', '')}
+                value={watch('Other_Coverage_Code')}
+                onChange={(e) => setValue('Other_Coverage_Code', e.target.value)}
+                onClear={() => setValue('Other_Coverage_Code', '')}
               />
             </div>
             <div className="flex flex-col gap-2 col-span-1">
-              <label className="block text-[#3A3541] text-[14px]">Date Received</label>
+              <label className="block text-[#3A3541] text-[14px]">Date Processed</label>
               <DatePickerInput
-                {...register('dos')}
-                value={watch('dos')}
+                {...register('Date_Processed')}
+                value={watch('Date_Processed')}
                 onChange={(date) => {
                   const formattedDate = date ? format(new Date(date), 'yyyy-MM-dd') : null;
-                  setValue('dos', formattedDate);
+                  setValue('Date_Processed', formattedDate);
                 }}
-                name="dos"
+                name="Date_Processed"
               />
             </div>
           </div>
