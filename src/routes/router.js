@@ -32,14 +32,6 @@ const AppRouter = () => {
           path: 'physician',
           element: <Physician />,
         },
-        {
-          path: 'files',
-          element: <Files />,
-        },
-        {
-          path: 'payments',
-          element: <Payments />,
-        },
       ],
     },
   ]);

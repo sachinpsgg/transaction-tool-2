@@ -9,8 +9,6 @@ const Sidebar = (props) => {
     const links = [
         {path: "/dashboard/claims", label: "Claims", Icon: ClaimIcon},
         {path: "/dashboard/physician", label: "Physician", Icon: PhysicianIcon},
-        {path: "/dashboard/files", label: "Files", Icon: FilesIcon},
-        {path: "/dashboard/payments", label: "Payments", Icon: PaymentIcon},
     ];
     return (
         <>
