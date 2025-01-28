@@ -191,7 +191,7 @@ const SearchResults = ({ data, onViewItem }) => {
     setItemsPerPage(Number(event.target.value));
     setCurrentPage(1);
   };
-
+  console.log(data)
   return (
     <div className="relative p-2">
       <div className="flex justify-between items-center z-20 py-4 relative">
@@ -238,7 +238,7 @@ const SearchResults = ({ data, onViewItem }) => {
               {[
                 { label: 'Member ID', key: 'pat_member_id' },
                 { label: 'Date Received', key: 'claim_date_recieved' },
-                { label: 'Physician NPI', key: 'physicians_npi' },
+                { label: 'Pharmacy NPI', key: 'physicians_npi' },
                 { label: 'Group Number', key: 'group_number' },
                 { label: 'Status', key: 'status' },
                 { label: 'Actions', key: '' },

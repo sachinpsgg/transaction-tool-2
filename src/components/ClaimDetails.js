@@ -17,13 +17,13 @@ const ClaimDetails = ({ onBack, item }) => {
   const navigate = useNavigate();
   const [decodedJson, setDecodedJson] = useState('');
   const [decodedJson2, setDecodedJson2] = useState('');
-
+  console.log(item)
   useEffect(() => {
     const fetchClaimDetails = async () => {
       try {
         setLoading(true);
         const response = await axios.request({
-          url: 'https://edi-api-demo.edix12pro.com/api//claimDetails',
+          url: 'https://edi-api-demo.edix12pro.com/api//claimDetailsA',
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -33,9 +33,9 @@ const ClaimDetails = ({ onBack, item }) => {
           },
         });
         const decodedJson = JSON.parse(atob(response.data.json));
-        const decodedJson2 = JSON.parse(atob(response.data.data['835_json']));
+        // const decodedJson2 = JSON.parse(atob(response.data.data['835_json']));
         setDecodedJson(decodedJson);
-        setDecodedJson2(decodedJson2);
+        // setDecodedJson2(decodedJson2);
         setJsonData(decodedJson);
         setCurrData(response.data.data || []);
         setTimelineData((response.data.journey || []).reverse());
@@ -87,10 +87,9 @@ const ClaimDetails = ({ onBack, item }) => {
                     </button>
                   }
                 />
-                <DataField label="Date Received" value={currData?.pat_dob} />
-                <DataField label="Date of Service" value={currData?.dos} />
+                <DataField label="Date Received" value={currData?.claim_date_recieved} />
                 <DataField
-                  label="Physician NPI"
+                  label="Pharmacy NPI"
                   value={
                     <button
                       className="text-blue-500 underline"
@@ -99,7 +98,7 @@ const ClaimDetails = ({ onBack, item }) => {
                     </button>
                   }
                 />
-                <DataField label="Patient Last Name" value={currData?.pat_lname} />
+                <DataField label="Group Number" value={currData?.group_number} />
               </div>
             </div>
             <div className="flex flex-row justify-between items-center text-lg font-semibold mb-2">

@@ -13,10 +13,21 @@ const SearchFilter = ({ filters, onChange, onApply, onKeyDown }) => {
             value={filters.date || ''}
             onChange={(date) => {
               const formattedDate = date ? format(new Date(date), 'yyyy-MM-dd') : null;
-              onChange('date', date);
+              onChange('Date_Recieved', date);
             }}
-            name="dateOfService"
+            name="Date_Recieved"
           />
+        </div>
+        <div>
+          <label className="block text-gray-700 mb-2">Group Number</label>
+          <select
+            className="w-full p-2 border"
+            value={filters.Group_Number}
+            onChange={(e) => onChange('Group_Number', e.target.value)}>
+            <option value="">Select Status</option>
+            <option value="Approved">Approved</option>
+            <option value="Rejected">Rejected</option>
+          </select>
         </div>
         <div>
           <label className="block text-gray-700 mb-2">Status</label>
