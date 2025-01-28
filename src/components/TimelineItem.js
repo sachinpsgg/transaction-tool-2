@@ -58,6 +58,8 @@
 import { SheetIcon } from '../helpers/Icons';
 
 export const TimelineItem = ({ status, details, date, statusColor, isLast, extra }) => {
+  const parsedMsg = JSON.parse(details);
+  console.log(details)
   const parseHtmlTable = (html) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
@@ -102,7 +104,13 @@ export const TimelineItem = ({ status, details, date, statusColor, isLast, extra
         <div className={`font-bold text-sm ${status !== 'SUCCESS' ? 'text-[#FF0F00]' : 'text-green-700'}`}>
           {status}
         </div>
-        <div className="text-gray-800 text-xs">{details}</div>
+        <div className="text-gray-800 text-xs">
+        {Object.entries(parsedMsg).map(([key, value]) => (
+          <p key={key}>
+            <strong>{key}:</strong> {value}
+          </p>
+        ))}
+        </div>
         <div className="text-gray-600 text-xs">{date}</div>
         {extra && <div className="mt-2">{parseHtmlTable(extra)}</div>}
       </div>
