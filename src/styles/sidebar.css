@@ -1,0 +1,16 @@
+.sidebar-option::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 2%;
+    background-color: #6E39CB;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-option.active::before {
+    background-color: #8650e3;
+}
+
