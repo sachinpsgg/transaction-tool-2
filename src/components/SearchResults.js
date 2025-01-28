@@ -240,6 +240,7 @@ const SearchResults = ({ data, onViewItem }) => {
                 { label: 'Date Received', key: 'claim_date_recieved' },
                 { label: 'Pharmacy NPI', key: 'physicians_npi' },
                 { label: 'Group Number', key: 'group_number' },
+                { label: 'OCC Code', key: 'other_coverage_code' },
                 { label: 'Status', key: 'status' },
                 { label: 'Actions', key: '' },
               ].map(({ label, key }) => (
@@ -266,6 +267,7 @@ const SearchResults = ({ data, onViewItem }) => {
                   <td className="px-4 py-2 text-gray-700">{item.claim_date_recieved}</td>
                   <td className="px-4 py-2 text-gray-700">{item.physicians_npi}</td>
                   <td className="px-4 py-2 text-gray-700">{item.group_number}</td>
+                  <td className="px-4 py-2 text-gray-700">{item.other_coverage_code}</td>
                   <td className="px-4 py-2 text-gray-700">
                     <span className={`font-semibold ${item.status === 'Paid' ? 'text-green-600' : 'text-red-600'}`}>
                       {item.status}
