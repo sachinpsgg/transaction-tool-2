@@ -136,7 +136,7 @@ const Physician = () => {
         <div className="mt-6 bg-white p-6 rounded-lg shadow-custom">
           <div className="grid gap-8 grid-cols-3">
             <div className="flex flex-col gap-2 col-span-1 w-full">
-              <label className="block text-[#3A3541] text-[14px]">Physicians Name</label>
+              <label className="block text-[#3A3541] text-[14px]">Pharmacy Name</label>
               <Select
                 options={physicians}
                 isLoading={fetchingPhysicians}
@@ -160,7 +160,7 @@ const Physician = () => {
             </div>
 
             <div className="flex flex-col gap-2 col-span-1 w-full">
-              <label className="block text-[#3A3541] text-[14px]">Physicians NPI</label>
+              <label className="block text-[#3A3541] text-[14px]">Pharmacy NPI</label>
               <Input
                 placeholder="1760472146"
                 value={watch('physiciansNPI')}
@@ -181,7 +181,7 @@ const Physician = () => {
             </div>
 
             <div className="flex flex-col gap-2 col-span-1 w-full">
-              <label className="block text-[#3A3541] text-[14px]">Date of Service</label>
+              <label className="block text-[#3A3541] text-[14px]">Date Received</label>
               <DatePickerInput
                 value={watch('dateOfService')}
                 onChange={(date) => {
@@ -251,7 +251,7 @@ const Physician = () => {
         {!loading && !formData && !showComplete && (
           <div className="flex flex-col items-center">
             <img src={require('../assets/img.png')} alt="Search for claims illustration" className="mb-4 h-56 w-72" />
-            <h2 className="text-[32px] text-[#777777] sticky">Search for Physician</h2>
+            <h2 className="text-[32px] text-[#777777] sticky">Search for Pharmacy</h2>
           </div>
         )}
       </div>

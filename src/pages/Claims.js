@@ -8,6 +8,8 @@ import SearchResults from '../components/SearchResults';
 import { format } from 'date-fns';
 import DatePickerInput from '../components/tempComps/DatepickerMui';
 import { useSearchParams } from 'react-router-dom';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 const Claims = () => {
   const {
@@ -30,9 +32,10 @@ const Claims = () => {
   useEffect(() => {
     const npiValue = searchParams.get('memberId');
     if (npiValue) {
-      setValue('pat_member_id', npiValue); // Set the physiciansNPI input value
+      setValue('pat_member_id', npiValue);
     }
   }, [searchParams, setValue]);
+  const claimTypeOptions=['Accepted','Reversed','Rejected']
   const onSubmit = async (data) => {
     console.log('Submitting data:', data);
     setLoading(true);
@@ -82,7 +85,7 @@ const Claims = () => {
         <div className="mt-6 bg-white p-6 rounded-lg shadow-custom">
           <div className="grid gap-8 grid-cols-3">
             <div className="flex flex-col gap-2 col-span-1">
-              <label className="block text-[#3A3541] text-[14px]">Patients Last Name</label>
+              <label className="block text-[#3A3541] text-[14px]">Member Id</label>
               {/*<Input placeholder="MEYERS" {...register('pat_lname')} />*/}
               <Input
                 placeholder="MEYERS"
@@ -92,7 +95,7 @@ const Claims = () => {
               />
             </div>
             <div className="flex flex-col gap-2 col-span-1">
-              <label className="block text-[#3A3541] text-[14px]">Patients First Name</label>
+              <label className="block text-[#3A3541] text-[14px]">Pharmacy NPI</label>
               {/*<Input placeholder="James" {...register('pat_fname')} />*/}
               <Input
                 placeholder="JAMES"
@@ -102,20 +105,26 @@ const Claims = () => {
               />
             </div>
             <div className="flex flex-col gap-2 col-span-1">
-              <label className="block text-[#3A3541] text-[14px]">Date of Birth</label>
-              <DatePickerInput
-                {...register('pat_dob')}
-                value={watch('pat_dob')}
-                onChange={(date) => {
-                  const formattedDate = date ? format(new Date(date), 'yyyy-MM-dd') : null;
-                  setValue('pat_dob', formattedDate);
+              <label className="block text-[#3A3541] text-[14px]">Claim Type</label>
+              <Select
+                labelId="demo-simple-select-autowidth-label"
+                id="demo-simple-select-autowidth"
+                autoWidth
+                label="Age"
+                sx={{
+                  height:'45px',
+                  background:'#F4F5F9',
+                  borderRadius:'10px'
                 }}
-                name="pat_dob"
-              />
-            </div>
+              >
+                <MenuItem value='Approved'>Approved</MenuItem>
+                <MenuItem value='Reversed'>Reversed</MenuItem>
+                <MenuItem value='Rejected'>Rejected</MenuItem>
+              </Select>
 
+            </div>
             <div className="flex flex-col gap-2 col-span-1">
-              <label className="block text-[#3A3541] text-[14px]">Member ID</label>
+              <label className="block text-[#3A3541] text-[14px]">OCC Code</label>
               {/*<Input placeholder="8934673327" {...register('pat_member_id')} />*/}
               <Input
                 placeholder="XR6144696"
@@ -124,20 +133,8 @@ const Claims = () => {
                 onClear={() => setValue('pat_member_id', '')}
               />
             </div>
-
             <div className="flex flex-col gap-2 col-span-1">
-              <label className="block text-[#3A3541] text-[14px]">Physicians NPI</label>
-              {/*<Input placeholder="8467382964" {...register('physicians_npi')} />*/}
-              <Input
-                placeholder="1760472146"
-                value={watch('physicians_npi')}
-                onChange={(e) => setValue('physicians_npi', e.target.value)}
-                onClear={() => setValue('physicians_npi', '')}
-              />
-            </div>
-
-            <div className="flex flex-col gap-2 col-span-1">
-              <label className="block text-[#3A3541] text-[14px]">Date of Service</label>
+              <label className="block text-[#3A3541] text-[14px]">Date Received</label>
               <DatePickerInput
                 {...register('dos')}
                 value={watch('dos')}

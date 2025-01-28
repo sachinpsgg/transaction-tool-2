@@ -8,7 +8,7 @@ const Sidebar = (props) => {
     const location = useLocation();
     const links = [
         {path: "/dashboard/claims", label: "Claims", Icon: ClaimIcon},
-        {path: "/dashboard/physician", label: "Physician", Icon: PhysicianIcon},
+        {path: "/dashboard/physician", label: "Pharmacy", Icon: PhysicianIcon},
     ];
     return (
         <>
