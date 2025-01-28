@@ -35,7 +35,6 @@ const ClaimDetails = ({ onBack, item }) => {
         const decodedJson = JSON.parse(atob(response.data.json));
         // const decodedJson2 = JSON.parse(atob(response.data.data['835_json']));
         setDecodedJson(decodedJson);
-        // setDecodedJson2(decodedJson2);
         setJsonData(decodedJson);
         setCurrData(response.data.data || []);
         setTimelineData((response.data.journey || []).reverse());
@@ -103,14 +102,6 @@ const ClaimDetails = ({ onBack, item }) => {
             </div>
             <div className="flex flex-row justify-between items-center text-lg font-semibold mb-2">
               <div>Claim: {currData?.claimID}</div>
-              <div>
-                Filename:
-                <button
-                  className="text-blue-500 underline"
-                  onClick={() => navigate(`/dashboard/files?filename=${currData?.filename}`)}>
-                  {currData?.filename}
-                </button>
-              </div>
             </div>
           </>
         )}
@@ -127,9 +118,6 @@ const ClaimDetails = ({ onBack, item }) => {
                 <JsonIcon />
                 <span className="text-blue-500">JSON</span>
               </div>
-              <div className="flex flex-row justify-center items-center max-w-7 max-h-5">
-                <ControlledOpenSelect onSelectionChange={handleSelectionChange} />
-              </div>
             </div>
             <div className="flex items-center space-x-4 pl-4 w-1/2">
               <SheetIcon />
@@ -144,17 +132,6 @@ const ClaimDetails = ({ onBack, item }) => {
               <JsonTextEditor jsonData={jsonData} />
             </div>
             <div className="px-2 py-8 h-screen w-1/2 overflow-y-auto mb-2 ">
-              {currData && (
-                <div className="mb-2 justify-start flex gap-2">
-                  {currData['835_file'] && (
-                    <a href={currData['835_file']} download target="_blank" rel="noopener noreferrer">
-                      <Button variant="primary" size="small" sx={{ background: '#6E39CB', color: 'white' }}>
-                        Download 835
-                      </Button>
-                    </a>
-                  )}
-                </div>
-              )}
               {timelineData.map((item, index) => (
                 <TimelineItem
                   key={index}
